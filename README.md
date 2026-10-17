@@ -2,47 +2,63 @@
 
 [![PHP lint](https://github.com/hthieme/open-social-wall/actions/workflows/php-lint.yml/badge.svg)](https://github.com/hthieme/open-social-wall/actions/workflows/php-lint.yml)
 
-Open Social Wall is a lightweight WordPress plugin that aggregates public **Mastodon RSS** and **Pixelfed Atom** feeds into one chronological, responsive masonry-style social wall.
+A lightweight WordPress plugin that combines public Mastodon and Pixelfed feeds into one responsive, chronological social wall.
 
-It is designed for personal sites, portfolios, blogs, community pages, and other WordPress installations that want to display federated social posts without embedding a third-party social-wall service.
+Open Social Wall is designed for people who want to bring their Fediverse activity back to their own website without relying on a proprietary social-wall service.
+
+It reads public RSS and Atom feeds server-side, normalizes the posts and displays them in a responsive masonry-style layout.
+
+## Why Open Social Wall?
+
+Social posts often live in separate networks and disappear into platform-specific timelines.
+
+Open Social Wall brings them together on your own WordPress site.
+
+The plugin focuses on three principles:
+
+- **Open by default** — uses public RSS and Atom feeds
+- **Lightweight** — plain PHP, CSS and vanilla JavaScript
+- **Website first** — the social wall should look like part of your site, not like an embedded third-party widget
 
 ## Features
 
-- Aggregates Mastodon and Pixelfed into one chronological stream
+- Mastodon RSS feed support
+- Pixelfed Atom feed support
+- Chronological aggregation across networks
 - Responsive masonry-style layout
-- Full post text; no automatic truncation
-- Image support, including multi-image posts when exposed by the feed
+- Full post text without automatic truncation
+- Image and multi-image support when available in the source feed
 - Deterministic wide cards for selected visual posts
-- Network filters: All, Mastodon, Pixelfed
-- Client-side **Load more** pagination without page reloads
-- Opens each card in the original network post
+- Network filters
+- Client-side **Load more** without page reloads
+- Original-post links for every card
 - WordPress transient caching
-- Configurable initial post count, batch size, feed pool, cache duration, and maximum wall width
-- No bundled analytics or tracking
+- Configurable feed pool, cache duration and wall width
+- No bundled analytics
 - No third-party JavaScript dependencies
 
 ## Requirements
 
 - WordPress 6.0 or newer
 - PHP 7.4 or newer
-- Public Mastodon RSS and/or Pixelfed Atom feed URLs
+- A public Mastodon RSS feed and/or Pixelfed Atom feed
 
 ## Installation
 
-### From a ZIP file
+### Install from ZIP
 
-1. Download or build the `open-social-wall` plugin ZIP.
-2. In WordPress, go to **Plugins → Add New Plugin → Upload Plugin**.
+1. Download the plugin ZIP.
+2. In WordPress, open **Plugins → Add New Plugin → Upload Plugin**.
 3. Upload the ZIP and activate **Open Social Wall**.
-4. Go to **Settings → Open Social Wall**.
-5. Enter at least one feed URL.
-6. Add the shortcode to a page or post:
+4. Open **Settings → Open Social Wall**.
+5. Add at least one feed URL.
+6. Insert the shortcode:
 
 ```text
 [open_social_wall]
 ```
 
-### From this repository
+### Install from source
 
 Copy the `open-social-wall` directory into:
 
@@ -50,45 +66,61 @@ Copy the `open-social-wall` directory into:
 wp-content/plugins/
 ```
 
-Then activate the plugin in the WordPress admin area.
+Then activate the plugin in WordPress.
 
-## Configuration
-
-Open **Settings → Open Social Wall**.
+## Feed configuration
 
 ### Mastodon
 
-For many Mastodon installations, a public profile feed follows this pattern:
+Many Mastodon servers expose public profile RSS feeds using this pattern:
 
 ```text
-Profile: https://mastodon.example/@username
-RSS:     https://mastodon.example/@username.rss
+Profile:
+https://mastodon.example/@username
+
+RSS:
+https://mastodon.example/@username.rss
 ```
 
-Availability can depend on the Mastodon server and account visibility.
+Feed availability depends on the Mastodon server and account visibility.
 
 ### Pixelfed
 
 A common Pixelfed Atom feed pattern is:
 
 ```text
-Profile: https://pixelfed.example/username
-Atom:    https://pixelfed.example/users/username.atom
+Profile:
+https://pixelfed.example/username
+
+Atom:
+https://pixelfed.example/users/username.atom
 ```
 
-Availability can depend on the Pixelfed instance and account visibility.
+Feed availability depends on the Pixelfed instance and account visibility.
 
-### Display settings
+## Display settings
 
-The settings page lets you configure:
+Open **Settings → Open Social Wall**.
 
-- **Posts shown initially** — default: 20
-- **Posts per “Load more”** — default: 12
-- **Maximum feed pool** — default: 60
-- **Cache duration** — default: 30 minutes
-- **Maximum wall width** — default: 1680 px
+Available options include:
 
-RSS and Atom feeds often expose only a limited history. The maximum feed pool cannot retrieve posts that the source feed itself does not publish.
+- Posts shown initially
+- Posts loaded per click
+- Maximum feed pool
+- Cache duration
+- Maximum wall width
+
+Default values:
+
+```text
+Initial posts:       20
+Load more batch:     12
+Maximum feed pool:   60
+Cache duration:      30 minutes
+Maximum width:       1680 px
+```
+
+RSS and Atom feeds expose only a limited amount of history. The plugin cannot retrieve posts that are not available through the source feed.
 
 ## Shortcode
 
@@ -98,13 +130,13 @@ Basic usage:
 [open_social_wall]
 ```
 
-Override the initial number of visible posts:
+Custom initial number of posts:
 
 ```text
 [open_social_wall initial="12"]
 ```
 
-Hide the network filter buttons:
+Hide network filters:
 
 ```text
 [open_social_wall filters="no"]
@@ -116,25 +148,50 @@ Combine options:
 [open_social_wall initial="16" filters="no"]
 ```
 
-## How links behave
+## Original post links
 
-Clicking a post card opens the original Mastodon or Pixelfed post in a new browser tab. Links inside post text also open safely in a new tab.
+Every card links to the original post on Mastodon or Pixelfed.
+
+Original posts open in a new browser tab.
 
 ## Privacy
 
-The plugin fetches configured public RSS/Atom feeds server-side through WordPress and caches normalized post data using WordPress transients. It does not include analytics or tracking code.
+Open Social Wall fetches configured public RSS and Atom feeds server-side through WordPress.
 
-Images are currently loaded from the media URLs provided by the source feed. Site owners should consider their own privacy, caching, and content-policy requirements before deployment.
+Normalized feed data is cached using WordPress transients.
 
-## Instagram
+The plugin:
 
-Instagram is **not included in version 0.1.0**. A future connector may use Meta's official API for eligible professional accounts. Scraping is intentionally not part of this project.
+- does not include analytics
+- does not include tracking scripts
+- does not require third-party JavaScript
+- does not require API credentials for Mastodon or Pixelfed
+
+Images are currently loaded from the media URLs published by the source feed.
+
+Site owners should evaluate their own privacy and caching requirements.
+
+## Roadmap
+
+Planned ideas include:
+
+- Gutenberg block
+- optional Instagram connector through Meta's official API
+- additional layout modes
+- expanded automated testing
+- WordPress Coding Standards checks
 
 See [ROADMAP.md](ROADMAP.md).
 
 ## Development
 
-The plugin intentionally uses plain PHP, CSS, and vanilla JavaScript. There is no build step.
+The plugin intentionally has no build step.
+
+Technology stack:
+
+- PHP
+- CSS
+- vanilla JavaScript
 
 Repository structure:
 
@@ -151,8 +208,12 @@ open-social-wall/
 
 Push a version tag such as `v0.1.0` to trigger the release workflow. It builds an installable plugin ZIP and creates a GitHub release automatically.
 
-Contributions are welcome. Please read [CONTRIBUTING.md](CONTRIBUTING.md) first.
+Contributions are welcome.
+
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) before submitting changes.
 
 ## License
 
-GPL-2.0-or-later. See [LICENSE](LICENSE).
+Open Social Wall is licensed under GPL-2.0-or-later.
+
+See [LICENSE](LICENSE).
