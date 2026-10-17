@@ -1,6 +1,8 @@
 # Open Social Wall
 
-[![PHP lint](https://github.com/hthieme/open-social-wall/actions/workflows/php-lint.yml/badge.svg)](https://github.com/hthieme/open-social-wall/actions/workflows/php-lint.yml)
+> **Development has moved to GitLab**  
+> This GitHub repository is kept for historical reference. Active development, issues and releases continue at:  
+> **https://gitlab.com/ibigfoot/open-social-wall**
 
 A lightweight WordPress plugin that combines public Mastodon, Pixelfed and other RSS/Atom feeds into one responsive, chronological social wall.
 
@@ -210,32 +212,11 @@ See [ROADMAP.md](ROADMAP.md).
 
 ## Development
 
-The plugin intentionally has no build step.
+Active development has moved to GitLab:
 
-Technology stack:
+https://gitlab.com/ibigfoot/open-social-wall
 
-- PHP
-- CSS
-- vanilla JavaScript
-
-Repository structure:
-
-```text
-open-social-wall/
-├── assets/
-│   ├── social-wall.css
-│   └── social-wall.js
-├── includes/
-│   ├── class-osw-feed.php
-│   └── class-osw-plugin.php
-└── open-social-wall.php
-```
-
-Push a version tag such as `v0.1.0` to trigger the release workflow. It builds an installable plugin ZIP and creates a GitHub release automatically.
-
-Contributions are welcome.
-
-Please read [CONTRIBUTING.md](CONTRIBUTING.md) before submitting changes.
+Please use GitLab for issues, merge requests and releases.
 
 ## License
 
