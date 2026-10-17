@@ -1,5 +1,7 @@
 # Open Social Wall
 
+[![PHP lint](https://github.com/hthieme/open-social-wall/actions/workflows/php-lint.yml/badge.svg)](https://github.com/hthieme/open-social-wall/actions/workflows/php-lint.yml)
+
 Open Social Wall is a lightweight WordPress plugin that aggregates public **Mastodon RSS** and **Pixelfed Atom** feeds into one chronological, responsive masonry-style social wall.
 
 It is designed for personal sites, portfolios, blogs, community pages, and other WordPress installations that want to display federated social posts without embedding a third-party social-wall service.
@@ -146,6 +148,8 @@ open-social-wall/
 │   └── class-osw-plugin.php
 └── open-social-wall.php
 ```
+
+Push a version tag such as `v0.1.0` to trigger the release workflow. It builds an installable plugin ZIP and creates a GitHub release automatically.
 
 Contributions are welcome. Please read [CONTRIBUTING.md](CONTRIBUTING.md) first.
 
