@@ -11,10 +11,12 @@ The format is inspired by [Keep a Changelog](https://keepachangelog.com/en/1.1.0
 - Initial public release
 - Mastodon RSS feed aggregation
 - Pixelfed Atom feed aggregation
+- Additional public RSS/Atom sources with custom display names
 - Chronological feed merging and de-duplication
 - Responsive masonry-style grid
 - Full post text and media rendering
-- All/Mastodon/Pixelfed filters
+- Centered, compact source filter bar
+- Dynamic filters for configured feed sources
 - Client-side Load more pagination
 - WordPress transient cache and manual cache clearing
 - Configurable feed pool, batch size, cache duration, and wall width
