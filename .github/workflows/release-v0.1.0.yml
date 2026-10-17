@@ -27,3 +27,5 @@ jobs:
             --target "$GITHUB_SHA" \
             --title "Open Social Wall v0.1.0" \
             --notes "Initial public release of Open Social Wall.\n\nHighlights:\n- Mastodon RSS and Pixelfed Atom aggregation\n- Optional additional RSS/Atom feeds with custom display names\n- Chronological mixed feed\n- Responsive masonry-style layout\n- Centered source filter bar\n- Full post text and media\n- Client-side Load more pagination\n- WordPress transient caching\n\nFeedback, bug reports and contributions are welcome."
+
+# One-time workflow used to publish the initial v0.1.0 release.
