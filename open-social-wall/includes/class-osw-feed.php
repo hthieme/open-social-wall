@@ -9,7 +9,7 @@ class OSW_Feed {
      * Loads a public RSS/Atom feed and normalizes posts.
      *
      * @param string $feed_url Feed URL.
-     * @param string $network  Network key: mastodon|pixelfed.
+     * @param string $network  Source key used for filtering and layout decisions.
      * @param int    $limit    Max items.
      * @return array|WP_Error
      */
@@ -162,6 +162,9 @@ class OSW_Feed {
             return 'wide';
         }
         if ($network === 'mastodon' && ($seed % 7 === 0)) {
+            return 'wide';
+        }
+        if ($network !== 'mastodon' && $network !== 'pixelfed' && ($seed % 5 === 0)) {
             return 'wide';
         }
         return 'standard';
