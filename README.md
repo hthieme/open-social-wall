@@ -2,15 +2,15 @@
 
 [![PHP lint](https://github.com/hthieme/open-social-wall/actions/workflows/php-lint.yml/badge.svg)](https://github.com/hthieme/open-social-wall/actions/workflows/php-lint.yml)
 
-A lightweight WordPress plugin that combines public Mastodon and Pixelfed feeds into one responsive, chronological social wall.
+A lightweight WordPress plugin that combines public Mastodon, Pixelfed and other RSS/Atom feeds into one responsive, chronological social wall.
 
-Open Social Wall is designed for people who want to bring their Fediverse activity back to their own website without relying on a proprietary social-wall service.
+Open Social Wall is designed for people who want to bring activity from open feeds back to their own website without relying on a proprietary social-wall service.
 
 It reads public RSS and Atom feeds server-side, normalizes the posts and displays them in a responsive masonry-style layout.
 
 ## Why Open Social Wall?
 
-Social posts often live in separate networks and disappear into platform-specific timelines.
+Posts and updates often live in separate networks and disappear into platform-specific timelines.
 
 Open Social Wall brings them together on your own WordPress site.
 
@@ -24,12 +24,13 @@ The plugin focuses on three principles:
 
 - Mastodon RSS feed support
 - Pixelfed Atom feed support
-- Chronological aggregation across networks
+- Additional public RSS or Atom feeds with custom display names
+- Chronological aggregation across all configured sources
 - Responsive masonry-style layout
+- Centered, compact source filter bar
 - Full post text without automatic truncation
 - Image and multi-image support when available in the source feed
 - Deterministic wide cards for selected visual posts
-- Network filters
 - Client-side **Load more** without page reloads
 - Original-post links for every card
 - WordPress transient caching
@@ -41,7 +42,7 @@ The plugin focuses on three principles:
 
 - WordPress 6.0 or newer
 - PHP 7.4 or newer
-- A public Mastodon RSS feed and/or Pixelfed Atom feed
+- At least one public RSS or Atom feed
 
 ## Installation
 
@@ -98,6 +99,22 @@ https://pixelfed.example/users/username.atom
 
 Feed availability depends on the Pixelfed instance and account visibility.
 
+### Additional feeds
+
+Under **Settings → Open Social Wall → Additional feeds**, select **Add another feed**.
+
+Each additional source can have:
+
+- a custom **Display name** such as `Blog`, `News` or `Photos`
+- a feed format of **Auto detect**, **RSS** or **Atom**
+- the public **Feed URL**
+- an optional profile or website URL
+- an enabled/disabled state
+
+The display name is used in the filter bar and on the corresponding cards.
+
+Generic RSS and Atom feeds vary considerably. Text, dates and links are generally portable; image availability depends on how the source feed publishes media.
+
 ## Display settings
 
 Open **Settings → Open Social Wall**.
@@ -122,6 +139,14 @@ Maximum width:       1680 px
 
 RSS and Atom feeds expose only a limited amount of history. The plugin cannot retrieve posts that are not available through the source feed.
 
+## Source filters
+
+When more than one configured source has posts, Open Social Wall automatically displays a centered filter bar.
+
+Built-in sources are labelled **Mastodon** and **Pixelfed**. Additional sources use their configured display names.
+
+On smaller screens the filter bar can scroll horizontally instead of wrapping into multiple rows.
+
 ## Shortcode
 
 Basic usage:
@@ -136,7 +161,7 @@ Custom initial number of posts:
 [open_social_wall initial="12"]
 ```
 
-Hide network filters:
+Hide source filters:
 
 ```text
 [open_social_wall filters="no"]
@@ -150,9 +175,9 @@ Combine options:
 
 ## Original post links
 
-Every card links to the original post on Mastodon or Pixelfed.
+Every card links to the original item published by its source feed.
 
-Original posts open in a new browser tab.
+Original items open in a new browser tab.
 
 ## Privacy
 
@@ -165,7 +190,7 @@ The plugin:
 - does not include analytics
 - does not include tracking scripts
 - does not require third-party JavaScript
-- does not require API credentials for Mastodon or Pixelfed
+- does not require API credentials for RSS or Atom sources
 
 Images are currently loaded from the media URLs published by the source feed.
 
